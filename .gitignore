@@ -5,5 +5,5 @@
 .vscode
 
 # Build files.
-app
+build
 node_modules

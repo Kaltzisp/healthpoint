@@ -12,6 +12,7 @@
         "@types/react-dom": "latest"
     },
     "scripts": {
+        "build": "react-scripts build",
         "start": "react-scripts start"
     },
     "browserslist": {

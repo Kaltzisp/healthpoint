@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.App-header {
+    display: flex;
+    flex-direction: column;
+    height: 88vh;
+    background-color: #282c34;
+    color: white;
+    font-size: calc(10px + 2vmin);
+}
