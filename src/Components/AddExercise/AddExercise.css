@@ -1,0 +1,46 @@
+form {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    color: black;
+}
+
+label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    width: 100%;
+}
+
+input[type="date"], input[type="decimal"], select {
+    margin-top: 5px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+select {
+    appearance: none; /* Remove default arrow */
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
