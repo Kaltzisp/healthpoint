@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
         // Compilation options.
-        "module": "ESNext",
+        "module": "NodeNext",
         "target": "ESNext",
+        "moduleResolution": "NodeNext",
         // Type-checking options.
         "strict": true,
         "noImplicitAny": true,
