@@ -2,32 +2,34 @@ import "./AddExercise.css";
 import React, { useState } from "react";
 
 function AddExercise(): React.JSX.Element {
-    const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-    const [exerciseType, setExerciseType] = useState("cardio");
-    const [exercise, setExercise] = useState("5km");
-    const [time, setTime] = useState("");
+    const [exerciseData, setExerciseData] = useState({
+        date: new Date().toISOString().split("T")[0],
+        type: "cardio",
+        exercise: "5km",
+        time: ""
+    });
 
+    function updateExercise(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void {
+        const { name, value } = event.target;
+        setExerciseData({ ...exerciseData, [name]: value });
+    }
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+    function saveExercise(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        localStorage.setItem(`${date}:${exerciseType}:${exercise}`, time);
-        console.log(`${date}:${exerciseType}:${exercise}`, time);
+        const { date, type, exercise, time } = exerciseData;
+        localStorage.setItem(`${date}:${type}:${exercise}`, time);
+        console.log(`${date}:${type}:${exercise}`, time);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={saveExercise}>
             <label>
                 {"Date"}
-                <input onChange={(e): void => setDate(e.target.value)} type="date" value={date} />
+                <input defaultValue={exerciseData.date} name="date" onChange={updateExercise} type="date" />
             </label>
             <label>
                 {"Type"}
-                <select defaultValue={exerciseType} onChange={(e): void => {
-                    setExerciseType(e.target.value);
-                    if (e.target.value !== "cardio") {
-                        setExercise("");
-                    }
-                }}>
+                <select defaultValue={exerciseData.type} name="type" onChange={updateExercise}>
                     <option value="cardio">{"Cardio"}</option>
                     <option value="strength">{"Strength"}</option>
                     <option value="flexibility">{"Flexibility"}</option>
@@ -35,15 +37,15 @@ function AddExercise(): React.JSX.Element {
             </label>
             <label>
                 {"Exercise"}
-                <select defaultValue={exercise} onChange={(e): void => setExercise(e.target.value)}>
-                    { exerciseType === "cardio" && <option value="1km">{"1 km"}</option>}
-                    { exerciseType === "cardio" && <option value="5km">{"5 km"}</option>}
-                    { exerciseType === "cardio" && <option value="10km">{"10 km"}</option>}
+                <select defaultValue={exerciseData.exercise} name="exercise" onChange={updateExercise}>
+                    { exerciseData.type === "cardio" && <option value="1km">{"1 km"}</option>}
+                    { exerciseData.type === "cardio" && <option value="5km">{"5 km"}</option>}
+                    { exerciseData.type === "cardio" && <option value="10km">{"10 km"}</option>}
                 </select>
             </label>
             <label>
                 {"Time"}
-                <input defaultValue={time} inputMode="decimal" onChange={(e): void => setTime(e.target.value)} type="decimal" />
+                <input defaultValue={exerciseData.time} inputMode="decimal" name="time" onChange={updateExercise} type="decimal" />
             </label>
             <button type="submit">{"Submit"}</button>
         </form>
