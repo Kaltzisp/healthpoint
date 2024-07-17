@@ -1,4 +1,3 @@
-// import "./AddExercise.css";
 import React, { useState } from "react";
 
 function AddBiometric(): React.JSX.Element {
