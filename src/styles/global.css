@@ -10,9 +10,15 @@
     padding: 0px;
 }
 
-main {
-    height: 88vh;
-    display: flex;
+html,
+body,
+#root {
+    height: 100%;
     background-color: #282c34;
+}
+
+main {
+    height: 88%;
+    display: flex;
     font-size: calc(10px + 2vmin);
 }

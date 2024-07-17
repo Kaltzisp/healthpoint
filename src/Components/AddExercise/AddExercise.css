@@ -12,7 +12,9 @@ label {
     color: rgb(0, 5, 36);
 }
 
-input, select, option {
+input,
+select,
+option {
     margin-top: 5px;
     width: 100%;
     padding: 10px;
@@ -20,7 +22,7 @@ input, select, option {
     border-radius: 5px;
     appearance: none;
     -webkit-appearance: none;
-    color:rgb(52, 116, 255);
+    color: rgb(52, 116, 255);
 }
 
 button {
