@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Menu from "./Components/Menu/Menu";
+import Menu from "./Components/Menu";
 import React from "react";
 
-import AddBiometric from "./Components/AddBiometric/AddBiometric";
-import AddExercise from "./Components/AddExercise/AddExercise";
-import ShowGraphs from "./Components/ShowGraphs/ShowGraphs";
+import AddBiometric from "./Components/AddBiometric";
+import AddExercise from "./Components/AddExercise";
+import ShowGraphs from "./Components/ShowGraphs";
 
 function App(): React.JSX.Element {
     return (

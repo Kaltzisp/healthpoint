@@ -1,4 +1,3 @@
-import "./ShowGraphs.css";
 import React from "react";
 
 function ShowGraphs(): React.JSX.Element {

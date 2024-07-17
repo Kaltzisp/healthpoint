@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 
 import "./styles/global.css";
 import "./styles/inputForm.css";
+import "./styles/menu.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
