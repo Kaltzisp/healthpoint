@@ -48,7 +48,7 @@
 
         // React rules.
         "react/jsx-closing-bracket-location": "off",
-        "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "always", "propElementValues": "never" }],
+        "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "always", "propElementValues": "always" }],
         "react/jsx-filename-extension": ["error", { "extensions": [".tsx", ".ts"] }],
         "react/jsx-first-prop-new-line": "off",
         "react/jsx-max-depth": ["error", { "max": 4 }],
