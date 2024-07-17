@@ -22,3 +22,7 @@ main {
     display: flex;
     font-size: calc(10px + 2vmin);
 }
+
+#exercise-list {
+    white-space: pre-wrap;
+}
