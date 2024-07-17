@@ -4,13 +4,15 @@
     text-align: center;
     justify-content: center;
     align-content: center;
+    font-family: "-apple-system", "Segoe UI";
+    color: white;
+    margin: 0px;
+    padding: 0px;
 }
 
-.App-header {
-    display: flex;
-    flex-direction: column;
+main {
     height: 88vh;
+    display: flex;
     background-color: #282c34;
-    color: white;
     font-size: calc(10px + 2vmin);
 }

@@ -1,25 +1,14 @@
-// MenuBar.js
 import "./Menu.css";
+import { Link } from "react-router-dom";
 import React from "react";
 
-interface MenuProps {
-    readonly onMenuClick: (view: "calories" | "exercise" | "graphs" | "weight") => void;
-}
-
-function Menu({ onMenuClick }: MenuProps): React.JSX.Element {
-
+function Menu(): React.JSX.Element {
     return (
-        <nav className="menu-bar">
-            <a href="#graphs" onClick={(): void => {
-                onMenuClick("graphs");
-            }}>{"Graphs"}
-            </a>
-            <a href="#weight">{"+Weight"}</a>
-            <a href="#calories">{"+Calories"}</a>
-            <a href="#exercise" onClick={(): void => {
-                onMenuClick("exercise");
-            }}>{"+Exercise"}
-            </a>
+        <nav id="menu">
+            <Link to="/">{"Graphs"}</Link>
+            <Link to="/add-weight">{"+Weight"}</Link>
+            <Link to="/add-calories">{"+Calories"}</Link>
+            <Link to="/add-exercise">{"+Exercise"}</Link>
         </nav>
     );
 
