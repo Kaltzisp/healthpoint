@@ -10,7 +10,6 @@ function Menu(): React.JSX.Element {
             <Link to="/add-exercise">{"+Exercise"}</Link>
         </nav>
     );
-
 }
 
 export default Menu;
