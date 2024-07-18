@@ -1,26 +1,47 @@
-import type { ExerciseData } from "../Components/AddExercise";
-
-async function storeExercise(data: ExerciseData): Promise<Response> {
-    return fetch("https://f35qe75lqe.execute-api.ap-southeast-2.amazonaws.com/deployment-stage/exercises/add-exercise", {
-        method: "POST",
-        body: JSON.stringify({
-            TableName: "HealthPoint_DB",
-            Item: {
-                key: { S: `${data.date}:${data.type}:${data.exercise}` },
-                date: { S: data.date },
-                type: { S: data.type },
-                exercise: { S: data.exercise },
-                value: { S: data.value }
-            }
-        })
-    });
+export interface Datum {
+    key: string | undefined;
+    date: string;
+    dataType: "exercise";
+    biometric: string | undefined;
+    exerciseType: string | undefined;
+    exercise: string | undefined;
+    value: string;
 }
 
-async function retrieveExercises(): Promise<Response> {
+interface Payload {
+    Item: {
+        [attr: string]: {
+            S: string;
+        } | undefined;
+    };
+    TableName: string;
+}
+
+async function retrieveData(): Promise<Response> {
     return fetch("https://f35qe75lqe.execute-api.ap-southeast-2.amazonaws.com/deployment-stage/exercises/get-exercises", {
         method: "POST",
         body: JSON.stringify({ TableName: "HealthPoint_DB" })
     });
 }
 
-export { storeExercise, retrieveExercises };
+async function sendData(endpoint: string, data: Datum): Promise<Response> {
+    const payload: Payload = {
+        TableName: "HealthPoint_DB",
+        Item: {}
+    };
+    for (const [key, entry] of Object.entries(data)) {
+        payload.Item[key] = { S: entry as string };
+    }
+    console.log(payload);
+    return fetch(`https://f35qe75lqe.execute-api.ap-southeast-2.amazonaws.com/deployment-stage/${endpoint}`, {
+        method: "POST",
+        body: JSON.stringify(payload)
+    });
+}
+
+async function storeExercise(data: Datum): Promise<Response> {
+    data.key = `${data.date}:${data.dataType}:${data.exerciseType}:${data.exercise}`;
+    return sendData("exercises/add-exercise", data);
+}
+
+export { retrieveData, storeExercise };

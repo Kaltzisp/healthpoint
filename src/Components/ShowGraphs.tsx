@@ -1,5 +1,5 @@
 import React from "react";
-import { retrieveExercises } from "../services/api";
+import { retrieveData } from "../services/api";
 
 function ShowGraphs(): React.JSX.Element {
     const exercises = [];
@@ -7,7 +7,7 @@ function ShowGraphs(): React.JSX.Element {
         exercises.push(`${key} = ${localStorage.getItem(key)}`);
     }
 
-    retrieveExercises().then((res) => {
+    retrieveData().then((res) => {
         res.json().then((data) => {
             console.log(data);
         }).catch(e => console.log(e));
