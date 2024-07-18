@@ -1,20 +1,32 @@
-import React from "react";
-import { retrieveData } from "../services/api";
+import { type Datum, retrieveData } from "../services/api";
+import React, { useState } from "react";
 
 function ShowGraphs(): React.JSX.Element {
-    const exercises = [];
-    for (const key of Object.keys(localStorage)) {
-        exercises.push(`${key} = ${localStorage.getItem(key)}`);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [items, setItems] = useState<Datum[]>([]);
+
+    function renderData(data: Datum[]): React.JSX.Element {
+        return (
+            <ul>
+                {
+                    data.map(item => 
+                        <li key={item.key}>{`${item.date}\t${item.dataType}\t${item.value}`}</li>
+                    )
+                }
+            </ul>
+        );
     }
 
-    retrieveData().then((res) => {
-        res.json().then((data) => {
-            console.log(data);
-        }).catch(e => console.log(e));
-    }).catch(e => console.error(e));
-
     return (
-        <div id="exercise-list">{exercises.join("\n")}</div>
+        <div id="exercise-list">
+            {items.length > 0 ? 
+                renderData(items)
+                : (((): void => {
+                    retrieveData().then((data) => {
+                        setItems(data);
+                    }).catch(e => console.error(e));
+                })(), <p>{"Loading..."}</p>)}
+        </div>
     );
 }
 

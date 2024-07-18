@@ -1,4 +1,4 @@
-import { type Datum, storeExercise } from "../services/api";
+import { type Datum, sendData } from "../services/api";
 import React, { useState } from "react";
 
 function AddExercise(): React.JSX.Element {
@@ -16,12 +16,7 @@ function AddExercise(): React.JSX.Element {
 
     function saveExercise(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        storeExercise(exerciseData).then((res) => {
-            console.log(
-                `API Response: ${res.status} for data:`,
-                `${exerciseData.date}:${exerciseData.exerciseType}:${exerciseData.exercise}:${exerciseData.value}`
-            );
-        }).catch(e => console.error(e));
+        sendData(exerciseData);
     }
 
     return (
