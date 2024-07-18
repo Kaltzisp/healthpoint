@@ -23,7 +23,7 @@ async function retrieveData(): Promise<Response> {
     });
 }
 
-async function sendData(endpoint: string, data: Datum): Promise<Response> {
+async function sendData(data: Datum): Promise<Response> {
     const payload: Payload = {
         TableName: "HealthPoint_DB",
         Item: {}
@@ -40,7 +40,7 @@ async function sendData(endpoint: string, data: Datum): Promise<Response> {
 
 async function storeExercise(data: Datum): Promise<Response> {
     data.key = `${data.date}:${data.dataType}:${data.exerciseType}:${data.exercise}`;
-    return sendData("exercises/add-exercise", data);
+    return sendData(data);
 }
 
 export { retrieveData, storeExercise };
