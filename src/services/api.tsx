@@ -1,7 +1,7 @@
 export interface Datum {
     key: string | undefined;
-    date: string;
     dataType: "exercise";
+    date: string;
     biometric: string | undefined;
     exerciseType: string | undefined;
     exercise: string | undefined;
