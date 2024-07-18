@@ -18,9 +18,8 @@ interface Payload {
 }
 
 async function retrieveData(): Promise<Response> {
-    return fetch("https://f35qe75lqe.execute-api.ap-southeast-2.amazonaws.com/deployment-stage/exercises/get-exercises", {
-        method: "POST",
-        body: JSON.stringify({ TableName: "HealthPoint_DB" })
+    return fetch("https://f35qe75lqe.execute-api.ap-southeast-2.amazonaws.com/v1", {
+        method: "GET"
     });
 }
 
@@ -33,7 +32,7 @@ async function sendData(endpoint: string, data: Datum): Promise<Response> {
         payload.Item[key] = { S: entry as string };
     }
     console.log(payload);
-    return fetch(`https://f35qe75lqe.execute-api.ap-southeast-2.amazonaws.com/deployment-stage/${endpoint}`, {
+    return fetch("https://f35qe75lqe.execute-api.ap-southeast-2.amazonaws.com/v1", {
         method: "POST",
         body: JSON.stringify(payload)
     });
