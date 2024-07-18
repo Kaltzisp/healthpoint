@@ -1,23 +1,33 @@
 import React, { useState } from "react";
+import { storeExercise } from "../services/api";
+
+export interface ExerciseData {
+    date: string;
+    type: string;
+    exercise: string;
+    value: string;
+}
 
 function AddExercise(): React.JSX.Element {
     const [exerciseData, setExerciseData] = useState({
         date: new Date().toISOString().split("T")[0],
         type: "cardio",
         exercise: "5km",
-        time: ""
+        value: ""
     });
 
     function updateExercise(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void {
-        const { name, value } = event.target;
-        setExerciseData({ ...exerciseData, [name]: value });
+        setExerciseData({ ...exerciseData, [event.target.name]: event.target.value });
     }
 
     function saveExercise(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        const { date, type, exercise, time } = exerciseData;
-        localStorage.setItem(`${date}:${type}:${exercise}`, time);
-        console.log(`${date}:${type}:${exercise}`, time);
+        storeExercise(exerciseData).then((res) => {
+            console.log(
+                `API Response: ${res.status} for data:`,
+                `${exerciseData.date}:${exerciseData.type}:${exerciseData.exercise}:${exerciseData.value}`
+            );
+        }).catch(e => console.error(e));
     }
 
     return (
@@ -43,8 +53,8 @@ function AddExercise(): React.JSX.Element {
                 </select>
             </label>
             <label>
-                {"Time"}
-                <input defaultValue={exerciseData.time} inputMode="decimal" name="time" onChange={updateExercise} type="decimal" />
+                {"Value"}
+                <input defaultValue={exerciseData.value} inputMode="decimal" name="value" onChange={updateExercise} type="decimal" />
             </label>
             <button type="submit">{"Submit"}</button>
         </form>
