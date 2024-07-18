@@ -1,7 +1,9 @@
 {
     "name": "healthpoint",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "dependencies": {
+        "chartjs-adapter-date-fns": "latest",
+        "chart.js": "latest",
         "react": "latest",
         "react-dom": "latest",
         "react-router-dom": "latest",
@@ -9,6 +11,7 @@
         "typescript": "latest"
     },
     "devDependencies": {
+        "@types/chart.js": "latest",
         "@types/react": "latest",
         "@types/react-dom": "latest"
     },

@@ -2,7 +2,7 @@
     bottom: 0px;
     height: 12%;
     display: flex;
-    background-color: #333000;
+    background-color: #2b2a28;
     padding: 5px;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -11,9 +11,10 @@
     bottom: 0px;
     height: 100%;
     width: 25%;
+    padding: 5px;
     margin: 5px;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #283a4d;
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s;

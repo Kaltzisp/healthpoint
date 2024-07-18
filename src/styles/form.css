@@ -1,8 +1,8 @@
 form {
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #6b6b6b;
     border-radius: 10px;
-    background-color: #f9f9f9;
+    background-color: #d4d4d4;
 }
 
 label {
@@ -23,6 +23,7 @@ option {
     appearance: none;
     -webkit-appearance: none;
     color: rgb(52, 116, 255);
+    background-color: #ebebeb;
 }
 
 button {

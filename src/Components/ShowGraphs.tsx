@@ -1,4 +1,5 @@
 import { type Datum, retrieveData } from "../services/api";
+import LineChart, { transformData } from "./LineChart";
 import React, { useEffect, useState } from "react";
 
 function ShowGraphs(): React.JSX.Element {
@@ -7,14 +8,22 @@ function ShowGraphs(): React.JSX.Element {
     useEffect(() => {
         retrieveData().then((saveData) => {
             setItems(saveData);
+            console.log(items);
         }).catch(e => console.error(e));
     }, []);
 
     return (
-        <div id="exercise-list">
-            { items.length > 0 ? 
-                <ul> {items.map(item => <li key={item.key}>{`${item.date}\t${item.dataType}\t${item.value}`}</li>)} </ul>
-                : "Loading..."}
+        <div id="graphs">
+            <div className="canvas-container">
+                { items.length > 0 ? 
+                    <LineChart data={transformData(items, "exercise", "5km")} name="5km Run (mins)" />
+                    : "Loading..."}
+            </div>
+            <div className="canvas-container">
+                { items.length > 0 ? 
+                    <LineChart data={transformData(items, "biometric", "weight")} name="Body Weight (kg)" />
+                    : "Loading..."}
+            </div>
         </div>
     );
 }
