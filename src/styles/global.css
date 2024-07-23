@@ -36,3 +36,11 @@ main {
     width: 100%;
     padding: 5%;
 }
+
+#graphs, .canvas-container, canvas {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}

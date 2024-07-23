@@ -29,7 +29,12 @@ function LineChart(chartProps: ChartProps): React.JSX.Element {
                 data: {
                     datasets: [{
                         data: chartProps.data,
-                        showLine: true
+                        showLine: true,
+                        pointRadius: 1,
+                        borderWidth: 2,
+                        pointHitRadius: 5,
+                        borderJoinStyle: "bevel",
+                        spanGaps: 1000 * 60 * 60 * 24 * 7
                     }]
                 },
                 options: {
@@ -49,6 +54,14 @@ function LineChart(chartProps: ChartProps): React.JSX.Element {
                         },
                         legend: {
                             display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (tooltipItem): string => {
+                                    const date = new Date(tooltipItem.parsed.x);
+                                    return `${ date.toLocaleDateString() }, ${ tooltipItem.parsed.y }`;
+                                }
+                            }
                         }
                     }
                 }
