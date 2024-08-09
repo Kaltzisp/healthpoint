@@ -2,6 +2,7 @@
     "name": "healthpoint",
     "version": "0.2.0",
     "dependencies": {
+        "@zxing/browser": "latest",
         "chartjs-adapter-date-fns": "latest",
         "chart.js": "latest",
         "react": "latest",
