@@ -1,7 +1,7 @@
 import "chartjs-adapter-date-fns";
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import type { Datum } from "../services/api";
+import type { Datum } from "services/api";
 
 type ChartData = {
     x: number;

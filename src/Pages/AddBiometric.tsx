@@ -1,4 +1,4 @@
-import { type Datum, sendData } from "../services/api";
+import { type Datum, sendData } from "services/api";
 import React, { useState } from "react";
 
 function AddBiometric(): React.JSX.Element {

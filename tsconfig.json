@@ -10,6 +10,7 @@
         "strictNullChecks": true,
         "removeComments": true,
         // Build options.
+        "baseUrl": "./src",
         "rootDir": "./src",
         "outDir": "./build",
         "sourceMap": true,

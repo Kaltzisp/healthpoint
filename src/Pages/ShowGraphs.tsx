@@ -1,5 +1,5 @@
-import { type Datum, retrieveData } from "../services/api";
-import LineChart, { transformData } from "./LineChart";
+import { type Datum, retrieveData } from "services/api";
+import LineChart, { transformData } from "Components/LineChart";
 import React, { useEffect, useState } from "react";
 
 function ShowGraphs(): React.JSX.Element {
