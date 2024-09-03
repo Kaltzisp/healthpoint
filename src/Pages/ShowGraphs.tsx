@@ -8,7 +8,6 @@ function ShowGraphs(): React.JSX.Element {
     useEffect(() => {
         retrieveData().then((saveData) => {
             setItems(saveData);
-            console.log(items);
         }).catch(e => console.error(e));
     }, []);
 
