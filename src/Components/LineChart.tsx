@@ -1,7 +1,7 @@
 import "chartjs-adapter-date-fns";
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import type { Datum } from "services/api";
+import type { Event } from "services/dynamoClient";
 
 type ChartData = {
     x: number;
@@ -13,15 +13,21 @@ interface ChartProps {
     data: ChartData;
 }
 
-function parseTime(time: string): number {
+function timeToMins(time: string): number {
     const secs = time.split(".").reverse().reduce((total, value, index) => total + Number(value) * 60 ** index, 0);
     return Number((secs / 60).toFixed(2));
 }
 
-export function transformData(data: Datum[], filterType: keyof Datum, filterValue: string): ChartData {
+function minsToTime(mins: number): string {
+    const mm = Math.floor(mins);
+    const ss = Math.round((mins - mm) * 60);
+    return `${mm}:${ss}`;
+}
+
+export function transformData(data: Event[], filterType: keyof Event, filterValue: string): ChartData {
     return data.filter(datum => datum[filterType] === filterValue).map(datum => ({
         x: new Date(datum.date).getTime(),
-        y: filterType === "exercise" ? parseTime(datum.value) : Number(datum.value)
+        y: filterType === "exercise" ? timeToMins(datum.value) : Number(datum.value)
     })).sort((a, b) => a.x - b.x);
 }
 
@@ -67,7 +73,7 @@ function LineChart(chartProps: ChartProps): React.JSX.Element {
                             callbacks: {
                                 label: (tooltipItem): string => {
                                     const date = new Date(tooltipItem.parsed.x);
-                                    return `${ date.toLocaleDateString() }, ${ tooltipItem.parsed.y }`;
+                                    return `${ date.toLocaleDateString() }, ${ minsToTime(tooltipItem.parsed.y) }`;
                                 }
                             }
                         }
