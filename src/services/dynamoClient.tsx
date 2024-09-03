@@ -30,9 +30,9 @@ function parseDynamoTable(table: DynamoTable): Event[] {
 }
 
 // Makes a request to DynamoDB using the API Gateway.
-async function makeDynamoRequest(method: "GET" | "PUT", tableName: string, event?: Event): Promise<Response> {
+async function makeDynamoRequest(method: "POST" | "PUT", tableName: string, event?: Event): Promise<Response> {
     const response = await fetch("https://f35qe75lqe.execute-api.ap-southeast-2.amazonaws.com/v2/", {
-        method: "PUT",
+        method,
         body: JSON.stringify(event ? {
             TableName: tableName,
             Item: createDynamoItem(event)
@@ -45,7 +45,7 @@ async function makeDynamoRequest(method: "GET" | "PUT", tableName: string, event
 
 export const dynamoClient = {
     get: async (tableName: string): Promise<Event[]> => {
-        const response = await makeDynamoRequest("GET", tableName);
+        const response = await makeDynamoRequest("POST", tableName);
         const dynamoTable = await response.json() as DynamoTable;
         return parseDynamoTable(dynamoTable);
     },
