@@ -1,13 +1,12 @@
-import { type Datum, sendData } from "services/api";
 import React, { useState } from "react";
+import { dynamoClient } from "services/dynamoClient";
 
 function AddBiometric(): React.JSX.Element {
     const [metricData, setMetricData] = useState({
         date: new Date().toISOString().split("T")[0],
-        dataType: "biometric",
-        biometric: "weight",
+        type: "weight",
         value: ""
-    } as Datum);
+    });
 
     function updateMetric(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void {
         const { name, value } = event.target;
@@ -16,7 +15,7 @@ function AddBiometric(): React.JSX.Element {
 
     function saveExercise(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        sendData(metricData);
+        dynamoClient.put("healthpoint-biometrics", metricData).catch(e => console.error(e));
     }
 
     return (
@@ -27,7 +26,7 @@ function AddBiometric(): React.JSX.Element {
             </label>
             <label>
                 {"Biometric"}
-                <select defaultValue={metricData.biometric} name="biometric" onChange={updateMetric}>
+                <select defaultValue={metricData.type} name="biometric" onChange={updateMetric}>
                     <option value="weight">{"Body Weight"}</option>
                     <option value="resting-hr">{"Heart Rate (rest)"}</option>
                 </select>
