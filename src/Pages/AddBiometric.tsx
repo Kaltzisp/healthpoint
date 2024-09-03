@@ -3,6 +3,7 @@ import { dynamoClient } from "services/dynamoClient";
 
 function AddBiometric(): React.JSX.Element {
     const [metricData, setMetricData] = useState({
+        key: "",
         date: new Date().toISOString().split("T")[0],
         type: "weight",
         value: ""
@@ -15,6 +16,7 @@ function AddBiometric(): React.JSX.Element {
 
     function saveExercise(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault();
+        metricData.key = `${metricData.type}:${metricData.date}`;
         dynamoClient.put("healthpoint-biometrics", metricData).catch(e => console.error(e));
     }
 

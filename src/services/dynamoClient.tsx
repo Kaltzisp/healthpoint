@@ -49,8 +49,5 @@ export const dynamoClient = {
         const dynamoTable = await response.json() as DynamoTable;
         return parseDynamoTable(dynamoTable);
     },
-    put: async (tableName: string, event: Event): Promise<Response> => {
-        event.key = `${event.date!}:${event.type!}`;
-        return makeDynamoRequest("PUT", tableName, event);
-    }
+    put: async (tableName: string, event: Event): Promise<Response> => makeDynamoRequest("PUT", tableName, event)
 };
