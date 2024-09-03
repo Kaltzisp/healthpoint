@@ -14,13 +14,7 @@ interface ChartProps {
 }
 
 function parseTime(time: string): number {
-    const secs = time.split(".").reverse().reduce((total, value, index) => {
-        const plusSecs = Number(value) * 60 ** index;
-        console.log(value);
-        console.log(index);
-        console.log(plusSecs);
-        return total + plusSecs;
-    }, 0);
+    const secs = time.split(".").reverse().reduce((total, value, index) => total + Number(value) * 60 ** index, 0);
     return Number((secs / 60).toFixed(2));
 }
 
