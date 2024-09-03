@@ -1,5 +1,8 @@
 export interface Event {
     [key: string]: string | undefined;
+    date: string;
+    type: string;
+    value: string;
 }
 
 interface Item {
@@ -26,7 +29,7 @@ function parseDynamoTable(table: DynamoTable): Event[] {
     return table.Items.map(item => Object.keys(item).reduce((event: Event, key: string) => {
         event[key] = item[key].S;
         return event;
-    }, {}));
+    }, {} as Event));
 }
 
 // Makes a request to DynamoDB using the API Gateway.

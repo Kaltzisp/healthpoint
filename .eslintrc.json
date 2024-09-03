@@ -75,6 +75,7 @@
         "@typescript-eslint/parameter-properties": "off",
         "@typescript-eslint/prefer-destructuring": "off",
         "@typescript-eslint/prefer-readonly-parameter-types": "off",
+        "@typescript-eslint/prefer-reduce-type-parameter": "off",
         "@typescript-eslint/prefer-nullish-coalescing": ["error", { "ignoreConditionalTests": true }],
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
