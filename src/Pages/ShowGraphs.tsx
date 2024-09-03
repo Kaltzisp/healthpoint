@@ -1,26 +1,30 @@
-import { type Datum, retrieveData } from "services/api";
+import { type Event, dynamoClient } from "services/dynamoClient";
 import LineChart, { transformData } from "Components/LineChart";
 import React, { useEffect, useState } from "react";
 
 function ShowGraphs(): React.JSX.Element {
-    const [items, setItems] = useState<Datum[]>([]);
+    const [exercises, setExercises] = useState<Event[]>([]);
+    const [biometrics, setBiometrics] = useState<Event[]>([]);
 
     useEffect(() => {
-        retrieveData().then((saveData) => {
-            setItems(saveData);
+        dynamoClient.get("healthpoint-exercise").then((events) => {
+            setExercises(events);
+        }).catch(e => console.error(e));
+        dynamoClient.get("healthpoint-biometrics").then((events) => {
+            setBiometrics(events);
         }).catch(e => console.error(e));
     }, []);
 
     return (
         <div id="graphs">
             <div className="canvas-container">
-                { items.length > 0 ? 
-                    <LineChart data={transformData(items, "exercise", "5km")} name="5km Run (mins)" />
+                { exercises.length > 0 ? 
+                    <LineChart data={transformData(exercises, "exercise", "5km")} name="5km Run (mins)" />
                     : "Loading..."}
             </div>
             <div className="canvas-container">
-                { items.length > 0 ? 
-                    <LineChart data={transformData(items, "biometric", "weight")} name="Body Weight (kg)" />
+                { biometrics.length > 0 ? 
+                    <LineChart data={transformData(biometrics, "type", "weight")} name="Body Weight (kg)" />
                     : "Loading..."}
             </div>
         </div>
