@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+// import { dynamoClient } from "services/dynamoClient";
 import { BrowserMultiFormatReader } from "@zxing/browser";
 
 function AddCalories(): React.JSX.Element {
@@ -8,7 +9,7 @@ function AddCalories(): React.JSX.Element {
 
     useEffect((): void => {
         BrowserMultiFormatReader.listVideoInputDevices().then((videoInputDevices): void => {
-            const device = videoInputDevices[0].deviceId;
+            const device = videoInputDevices[1].deviceId;
             codeReader.decodeFromVideoDevice(device, "video", (result, error) => {
                 console.log(resultRef);
                 if (result && resultRef.current) {
