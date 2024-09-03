@@ -8,6 +8,7 @@ function AddCalories(): React.JSX.Element {
     const codeReader = new BrowserMultiFormatReader();
 
     useEffect((): void => {
+        console.log("VERSION?");
         BrowserMultiFormatReader.listVideoInputDevices().then((videoInputDevices): void => {
             const device = videoInputDevices[1].deviceId;
             codeReader.decodeFromVideoDevice(device, "video", (result, error) => {
