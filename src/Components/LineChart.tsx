@@ -13,8 +13,22 @@ interface ChartProps {
     data: ChartData;
 }
 
+function parseTime(time: string): number {
+    const secs = time.split(".").reverse().reduce((total, value, index) => {
+        const plusSecs = Number(value) * 60 ** index;
+        console.log(value);
+        console.log(index);
+        console.log(plusSecs);
+        return total + plusSecs;
+    }, 0);
+    return Number((secs / 60).toFixed(2));
+}
+
 export function transformData(data: Datum[], filterType: keyof Datum, filterValue: string): ChartData {
-    return data.filter(datum => datum[filterType] === filterValue).map(datum => ({ x: new Date(datum.date).getTime(), y: parseFloat(datum.value) })).sort((a, b) => a.x - b.x);
+    return data.filter(datum => datum[filterType] === filterValue).map(datum => ({
+        x: new Date(datum.date).getTime(),
+        y: filterType === "exercise" ? parseTime(datum.value) : Number(datum.value)
+    })).sort((a, b) => a.x - b.x);
 }
 
 function LineChart(chartProps: ChartProps): React.JSX.Element {
