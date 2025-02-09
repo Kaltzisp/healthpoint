@@ -7,3 +7,4 @@ A one stop shop health tracker built in TypeScript.
 * Calorie tracking and recipe management
 * Weight tracking and progres
 * Barcode scanner for diet data entry
+* Can be run locally over private IP or hosted online
